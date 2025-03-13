@@ -1,4 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -6,20 +5,15 @@ import {
   onAuthStateChanged,
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+// Load saved notes
+import {
+  getDocs,
+  query,
+  where,
+} from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDlZYl5QR9-B2NA-KBG9wjAj12TbxaNdYQ",
-  authDomain: "logindemo-7f901.firebaseapp.com",
-  projectId: "logindemo-7f901",
-  storageBucket: "logindemo-7f901.firebasestorage.app",
-  messagingSenderId: "705051436506",
-  appId: "1:705051436506:web:545f430fa5d1671ddd8ce3",
-  measurementId: "G-GEVTCPVTYZ",
-};
+import { auth } from "./Firebase.js";
 
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const signUpBtn = document.getElementById("signUpBtn");
@@ -31,6 +25,14 @@ const authPart = document.getElementById("authPart");
 //hiding the top secret part initially
 authPart.style.display = "none";
 
+const routeToHomepage = () => {
+  window.location.href = "Homepage.html";
+};
+
+const routeToSignup = () => {
+  window.location.href = "Index.html";
+};
+
 //signup
 const signUp = async () => {
   const signUpEmail = email.value;
@@ -40,13 +42,14 @@ const signUp = async () => {
       // Signed in
       const user = userCreditional.user;
       console.log(user);
-      alert("user created successfully");
+
+      routeToHomepage();
+      console.log("user created successfully");
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
-      alert(errorMessage);
     });
 };
 
@@ -59,13 +62,12 @@ const signIn = async () => {
       // Signed in
       const user = userCredential.user;
       console.log(user);
-      alert("user signed in successfully");
+      routeToHomepage();
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
-      alert(errorMessage);
     });
 };
 //check auth state
@@ -88,14 +90,14 @@ const userSignOut = () => {
   signOut(auth)
     .then(() => {
       console.log("user signed out");
-      alert("user signed out successfully");
+
+      routeToSignup();
     })
     .catch((error) => {
       // An error happened.
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
-      alert(errorMessage);
     });
 };
 

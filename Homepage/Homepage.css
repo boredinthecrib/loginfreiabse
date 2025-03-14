@@ -1,0 +1,203 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Header */
+header {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px;
+  width: 100%;
+  background-color: lightcoral;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Layout */
+.mainPage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 90%;
+  max-width: 900px;
+  gap: 20px; /* Space between the form and saved notes */
+  margin-top: 20px;
+}
+
+/* Form Container */
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Title */
+h1 {
+  font-size: 22px;
+  color: #333;
+}
+
+/* Textarea */
+textarea {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: none;
+  transition: 0.3s ease-in-out;
+}
+
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Dialog Boxes */
+/* Saved Notes Section */
+/* Saved Notes Section */
+#savedNotes {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Individual Note (Dialog Box Style) */
+.saved-note {
+  background: #007bff;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  max-width: 85%;
+  word-wrap: break-word;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.saved-note:hover {
+  transform: scale(1.05);
+}
+
+/* Modal Background (Overlay) */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Close Button */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-modal:hover {
+  color: red;
+}
+
+/* Buttons */
+button {
+  background-color: purple;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: monospace;
+  color: white;
+  padding: 11px;
+  margin-left: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.start:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Save Note Button */
+.save {
+  background-color: #007bff;
+  color: white;
+}
+
+.save:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.save:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Saved Note Item */
+.note-item {
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mainPage {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #savedNotes {
+    width: 100%;
+    max-width: 400px;
+  }
+}

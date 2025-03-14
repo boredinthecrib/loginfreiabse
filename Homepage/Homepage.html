@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voice-to-Text Note App</title>
+    <link rel="stylesheet" href="Homepage.css" />
+
+    <script type="module" src="Homepage.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Voice-to-Text Note App</h1>
+      <textarea
+        id="noteText"
+        rows="5"
+        placeholder="Start speaking..."
+      ></textarea>
+      <div>
+        <button id="toggleRecording" class="start">Start Recording</button>
+        <button id="saveNote" class="save" disabled>Save Note</button>
+      </div>
+      <div id="savedNotes"></div>
+      <!-- Container for saved notes -->
+    </div>
+  </body>
+</html>

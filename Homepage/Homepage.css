@@ -85,6 +85,10 @@ textarea:focus {
   gap: 10px;
 }
 
+#savedNotes:empty {
+  visibility: hidden;
+}
+
 /* Individual Note (Dialog Box Style) */
 .saved-note {
   background: #007bff;

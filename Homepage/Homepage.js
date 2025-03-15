@@ -41,29 +41,29 @@ toggleRecordingButton.addEventListener("click", () => {
 
 saveNoteButton.addEventListener("click", async () => {
   const noteContent = textArea.value.trim();
-  if (noteContent) {
-    // Create a new div to append the saved note
-    const noteDiv = document.createElement("div");
-    noteDiv.classList.add("saved-note");
-    noteDiv.textContent = noteContent;
-    // Append the saved note to the savedNotes container
-    savedNotesContainer.appendChild(noteDiv);
-    // Clear the textarea and disable the save button
-    textArea.value = "";
-    saveNoteButton.disabled = true;
+  if (!noteContent || !userEmail) {
+    alert("Invalid note or user.");
+    return;
+  }
 
-    // Save to database;
-    try {
-      const response = await fetch(`${API_URL}/notes`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: userEmail, content: noteContent }),
-      });
-      const savedNote = await response.json();
-      displayNote(savedNote.content);
-    } catch (error) {
-      console.error("Error saving note:", error);
+  try {
+    const response = await fetch(`${API_URL}/notes`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: userEmail, content: noteContent }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      displayNote(result.note.content);
+      textArea.value = ""; // Clear input field
+      saveNoteButton.disabled = true;
+    } else {
+      console.error("Failed to save note:", result.error);
     }
+  } catch (error) {
+    console.error("Error saving note:", error);
   }
 });
 
@@ -72,9 +72,17 @@ textArea.addEventListener("input", () => {
 });
 
 const loadNotes = async () => {
+  if (!userEmail) {
+    console.error("No user email found in local storage.");
+    return;
+  }
+
   try {
     const response = await fetch(`${API_URL}/notes/${userEmail}`);
     const notes = await response.json();
+
+    savedNotesContainer.innerHTML = ""; // Clear existing notes before rendering
+
     notes.forEach((note) => displayNote(note.content));
 
     console.log("notes -> ", notes);
@@ -85,6 +93,15 @@ const loadNotes = async () => {
 
 // Display a note
 const displayNote = (content) => {
+  // Avoid duplicate notes by checking existing notes
+  if (
+    [...savedNotesContainer.children].some(
+      (note) => note.textContent === content
+    )
+  ) {
+    return; // Skip adding duplicate notes
+  }
+
   const noteDiv = document.createElement("div");
   noteDiv.classList.add("saved-note");
   noteDiv.textContent = content;

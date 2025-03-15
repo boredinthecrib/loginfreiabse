@@ -1,0 +1,68 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffe5e5; /* Light background to match lightcoral theme */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+h2 {
+  color: #b22222; /* Darker shade of lightcoral for contrast */
+  font-size: 24px;
+}
+
+.error {
+  color: #fff;
+  background-color: #d9534f; /* Bootstrap-like danger color */
+  padding: 10px;
+  width: 300px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: none;
+}
+
+form {
+  background: lightcoral;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #b22222;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #fff;
+  background-color: #ffcccc;
+}
+
+button {
+  background-color: #b22222;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #8b1a1a;
+}

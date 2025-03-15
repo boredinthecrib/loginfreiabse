@@ -1,60 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-		<link rel="stylesheet" href="./style.css" />
-	</head>
-	<body>
-		<h2>Already have an account with us? Login</h2>
-		<form id="LoginForm">
-			<input type="email" id="email" placeholder="Email" required /><br />
-			<input
-				type="password"
-				id="password"
-				placeholder="Password"
-				required
-			/><br />
-			<button type="submit">Login</button>
-		</form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <form id="LoginForm">
+      <input type="email" id="email" placeholder="Email" required /><br />
+      <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        required
+      /><br />
+      <button type="submit">Login</button>
+    </form>
 
-		<script>
-			window.onload = () => {
-				const API_URL = "http://localhost:5001";
-				document
-					.getElementById("LoginForm")
-					.addEventListener("submit", async (event) => {
-						event.preventDefault();
+    <script>
+      window.onload = () => {
+        const API_URL = "http://localhost:5001";
+        document
+          .getElementById("LoginForm")
+          .addEventListener("submit", async (event) => {
+            event.preventDefault();
 
-						const email = document.getElementById("email").value;
-						const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
 
-						try {
-							const response = await fetch(`${API_URL}/login`, {
-								method: "POST",
-								headers: { "Content-Type": "application/json" },
-								body: JSON.stringify({ email, password })
-							});
+            try {
+              const response = await fetch(`${API_URL}/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+              });
 
-							const data = await response.json();
+              const data = await response.json();
 
-							if (data.success) {
-								// Store user data in localStorage
-								localStorage.setItem("user", data.user.name);
-								localStorage.setItem("userEmail", data.user.email);
+              if (data.success) {
+                // Store user data in localStorage
+                localStorage.setItem("user", data.user.name);
+                localStorage.setItem("userEmail", data.user.email);
 
-								// Redirect to homepage
-								window.location.href =
-									"http://127.0.0.1:5500/Homepage/Homepage.html";
-							} else {
-								alert(data.message || "Login failed");
-							}
-						} catch (error) {
-							console.error("Error:", error);
-						}
-					});
-			};
-		</script>
-	</body>
+                // Redirect to homepage
+                window.location.href =
+                  "http://127.0.0.1:5500/Homepage/Homepage.html";
+              } else {
+                alert(data.message || "Login failed");
+              }
+            } catch (error) {
+              console.error("Error:", error);
+            }
+          });
+      };
+    </script>
+  </body>
 </html>
